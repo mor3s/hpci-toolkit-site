@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-	site: 'https://hpci-toolkit.netlify.app',   // set once you have the URL (step 7)
+	site: 'https://loquacious-mandazi-e99539.netlify.app',   // set once you have the URL (step 7)
 	integrations: [
 		starlight({
 			title: 'HPCI Toolkit',
