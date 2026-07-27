@@ -1,24 +1,24 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// https://astro.build/config
 export default defineConfig({
+	site: 'https://hpci-toolkit.netlify.app',   // set once you have the URL (step 7)
 	integrations: [
 		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			title: 'HPCI Toolkit',
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/mor3s/hpci-toolkit' },
+			],
 			sidebar: [
+				{ label: 'Understand', items: ['concepts'] },
+				{ label: 'Tutorial', items: [{ autogenerate: { directory: 'tutorial' } }] },
+				{ label: 'Developers', items: [{ autogenerate: { directory: 'developers' } }] },
 				{
-					label: 'Guides',
+					label: 'Showcase',
 					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
+						{ label: 'Veyra', slug: 'showcase/veyra' },
+						{ label: 'Ritual Grove', slug: 'showcase/ritual-grove' },
 					],
-				},
-				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
 				},
 			],
 		}),

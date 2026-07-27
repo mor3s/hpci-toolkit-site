@@ -1,0 +1,35 @@
+---
+title: A toolkit for attention
+description: The concepts behind the HPCI Toolkit — three agents, six relationships, and rituals.
+---
+
+
+
+**A toolkit for attention**
+
+The HPCI Toolkit is a small system for composing relationships among a person, a plant, and a machine. It proceeds from a relational rather than human-centred stance: the three parties it brings together are treated as agents on an equal footing, each named, each holding a role, and each able to act upon the others. The person is present to the plant and acts through and alongside the machine. The plant is not a passive object of measurement but an agent whose states and changes register in the system and shape what follows. The machine senses, responds, and carries out its part rather than serving as a neutral instrument reporting values to a human reader. What the toolkit constructs is the space in which these three act upon one another, and what it makes legible is the relationship itself rather than any single reading taken from it.
+
+This even-handedness is the toolkit's organising commitment. Most sensing systems resolve into a user operating a device upon some material; the toolkit instead holds the three parties in a symmetry, declining to collapse them into a hierarchy of operator, tool, and object. The plant's condition is granted standing in the system equal to the person's actions and the machine's, and the arrangement is designed so that a change originating with any of the three can become the occasion for the others to respond.
+
+**Three agents**
+
+Every situation the toolkit builds is described in terms of three agents: the human, the plant, and the machine. The human is the person present to the plant and party to the ritual. The plant is the living thing the situation is organised around, whose states are treated as its own rather than as mere data about it. The machine is what senses and responds — a small sensing device, or the interface through which a person perceives and acts. Naming all three as agents is a deliberate choice: it establishes that each has a part to play and that the relationships between them run in both directions, rather than casting two of them as the equipment through which a third pursues its ends.
+
+**Six relationships**
+
+Between the three agents run six relationships, each a direction of action or attention from one party to another, and each paired with its counterpart so that every pair of agents is joined in both directions. Between machine and human, the machine can *say* something to the person, and the person can *ask* something of the machine. Between machine and plant, the machine can *sense* the plant, and can *act* upon it. Between human and plant, the person can *tend* the plant, and can *attend* to it. Each of the six is a distinct kind of exchange, and the toolkit's work is to make them legible: to record when each occurs, and to compose them into ordered sequences that hold together as a practice.
+
+Two of these relationships, tending and attending, cannot be sensed. No instrument reads the bond between a person and a plant, so the system has no means of confirming that a plant was in fact watered, or genuinely observed. It can only invite the act and record the person's report that it took place. This is treated as a design commitment rather than a shortcoming. It marks the boundary between what the apparatus can instrument and what only a person can enact, and rather than concealing that boundary the toolkit inscribes it into the record of every ritual, so that the human acts a ritual depends upon are represented as such and not mistaken for measurements the machine has taken.
+
+**The ritual**
+
+The sequences composed from these relationships are called rituals, and the choice of term is considered. A ritual, in the sense the toolkit intends, is a repeated, structured sequence of actions that alters the state of those who take part or of the situation around them, independently of whether every participant consciously understands or interprets it — a sense broad enough to include structured behaviour among non-human actors as readily as human practice. It is useful to place this against the more familiar notions of the algorithm and the protocol. A ritual resembles both in being structured, repeatable, and rule-governed: it proceeds in a defined order, the same way each time, and its steps are specified rather than improvised. It differs in a decisive respect. An algorithm is executed by a machine and a protocol coordinates parties toward a settled outcome, whereas a ritual here is carried out by none of the agents alone. It is distributed across all three — some steps performed by the machine and invisible to the person, some the meaningful human acts the sequence pauses to make room for, some conditional upon what the plant's state has been sensed to be. No single agent runs it; the ritual is the form their joint action takes. It is this distribution across human, plant, and machine, none of them reducible to the others, that makes "ritual" the fitting word where "algorithm" or "protocol" would each claim too much for one party. Composing rituals is the central activity the toolkit supports, and a ritual, once composed, is the unit that can be run, recorded, and shared.
+
+**How it is arranged**
+
+The system is deliberately modest in construction. It comprises three parts that do not address one another directly: the devices attached to plants, a single small server, and the interface a person uses. Each communicates only through a shared record held by the server, which serves as the one source of truth about what exists and what has occurred. A device does not command the interface, nor the interface a device; each reads from and writes to the common record, and the server reconciles them. This indirection is what keeps the parts independent and the whole robust, and it has a consequence for the person taking part: they never encounter the machinery as such, only the plant, the ritual, and their own role within it. A fuller technical account is given in the developer documentation.
+
+**One backbone, many practices**
+
+Because the toolkit fixes only this small vocabulary — three agents, six relationships, and rituals composed from them — it does not prescribe what any particular practice is for. The same backbone supports markedly different work. In one application it becomes a tabletop role-playing game, in which players attend to a living plant as part of the fiction and the plant's sensed states enter the unfolding story. In another it becomes a practical instrument for woodland rewilding, structuring the care of seedlings from collection through nursery to replanting and monitoring. These are not separate systems built to resemble one another but the same model enacted toward different ends, and the contrast between them is the clearest demonstration of what the vocabulary is: not a fixed apparatus, but a grammar for composing relationships that each practice puts to its own use. The sections that follow present each application in turn.
+
