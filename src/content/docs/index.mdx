@@ -1,40 +1,47 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: HPCI Toolkit
+description: The HPCI Toolkit — a small system for composing relationships among a person, a plant, and a machine, built to be adapted.
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  title: HPCI Toolkit
+  tagline: Human–Plant–Computer Interaction — a small system for composing relationships among a person, a plant, and a machine.
   image:
-    file: ../../assets/houston.webp
+    file: ../../assets/three-agents.svg
+    alt: Three agents — human, plant, and machine — each joined to the others by a pair of relationships.
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Understand the toolkit
+      link: /concepts/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/mor3s/hpci-toolkit
       icon: external
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+The toolkit fixes a small vocabulary — three agents, six relationships, and the rituals composed from them — and leaves open what any practice built on it is for. The paths below lead to the idea itself, to running it, to adapting it, and to what it has become in practice.
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+<CardGrid>
+  <Card title="Understand" icon="open-book">
+    The concepts behind the toolkit: three agents on an equal footing, the six relationships between them, and what a ritual is.
+
+    [Read the concepts →](/concepts/)
+  </Card>
+  <Card title="Tutorial" icon="rocket">
+    Run it from a fresh clone, connect the electronics, and set everything up — then adapt it to your own sensors and context.
+
+    [Start the tutorial →](/tutorial/01-get-it-running/)
+  </Card>
+  <Card title="Developers" icon="setting">
+    The technical reference: architecture, data model, the HTTP API, the ritual engine, and the points at which the toolkit is meant to be extended.
+
+    [Read the reference →](/developers/01-overview/)
+  </Card>
+  <Card title="Showcase" icon="star">
+    Applications built on the toolkit — a tabletop game and a woodland-regeneration field system — each adapting the same backbone to a different end.
+
+    [See the prototypes →](/showcase/)
+  </Card>
 </CardGrid>
