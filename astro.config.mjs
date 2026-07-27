@@ -16,6 +16,7 @@ export default defineConfig({
 				{
 					label: 'Showcase',
 					items: [
+						{ label: 'Overview', slug: 'showcase' },
 						{ label: 'Veyra', slug: 'showcase/veyra' },
 						{ label: 'Ritual Grove', slug: 'showcase/ritual-grove' },
 					],
