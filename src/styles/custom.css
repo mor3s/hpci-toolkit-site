@@ -1,9 +1,4 @@
-/* Show the hero diagram in full*/
-.hero img {
-  object-fit: contain !important;
-  width: auto !important;
-  height: auto !important;
-  max-width: 100%;
-  max-height: 22rem;
-  margin-inline: auto;
+.hero > img,
+.hero > .hero-html {
+  width: min(150%, 34rem);
 }
