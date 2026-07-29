@@ -1,8 +1,10 @@
 ---
 const nav = [
+  { label: 'Concepts', href: '/concepts/' },
   { label: 'Gallery', href: '/gallery/' },
   { label: 'Ritual Library', href: '/rituals/' },
   { label: 'Blog', href: '/blog/' },
+  { label: 'About', href: '/about/' },
   { label: 'Docs', href: '/docs/' },
 ];
 ---
@@ -11,7 +13,7 @@ const nav = [
     <a class="wordmark" href="/">HPCI Toolkit</a>
     <nav class="site-nav">
       {nav.map((n) => <a href={n.href}>{n.label}</a>)}
-      <a href="https://github.com/mor3s/hpci-toolkit">GitHub ↗</a>
+      <a href="https://github.com/mor3s/hpci-toolkit" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
     </nav>
   </div>
 </header>

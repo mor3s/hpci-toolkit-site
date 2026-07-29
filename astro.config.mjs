@@ -11,7 +11,6 @@ export default defineConfig({
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/mor3s/hpci-toolkit' },
 			],
 			sidebar: [
-				{ label: 'Understand', items: ['docs/concepts'] },
 				{ label: 'Tutorial', items: [{ autogenerate: { directory: 'docs/tutorial' } }] },
 				{ label: 'Developers', items: [{ autogenerate: { directory: 'docs/developers' } }] },
 			],

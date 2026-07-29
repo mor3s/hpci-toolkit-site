@@ -124,3 +124,6 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .form-status { min-height: 1.4em; color: var(--ink-soft); }
 
 .prose img { max-width: 100%; height: auto; border-radius: 10px; margin-block: 1.5rem; display: block; }
+
+.concept-figure { margin-block: 1.5rem; }
+.concept-figure img { width: 100%; max-width: 520px; height: auto; display: block; margin-inline: auto; }
