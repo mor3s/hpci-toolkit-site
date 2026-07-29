@@ -11,8 +11,13 @@
   },
   "dependencies": {
     "@astrojs/starlight": "^0.41.4",
+    "@octokit/core": "^7.0.6",
     "astro": "^7.0.2",
     "mermaid": "^11.16.0",
+    "octokit-plugin-create-pull-request": "^6.0.1",
     "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^5.3.0"
   }
 }

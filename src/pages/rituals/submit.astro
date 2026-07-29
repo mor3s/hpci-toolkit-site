@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Share a ritual — HPCI Toolkit" description="Submit a ritual you built with the toolkit.">
+  <section class="container prose">
+    <h1>Share a ritual</h1>
+    <p class="lead">
+      Built a ritual with the toolkit? Share it here. Fill in a few details and paste the
+      ritual's exported definition. Your submission opens a pull request for review — once
+      approved, it appears in the library.
+    </p>
+
+    <form id="ritual-form" class="ritual-form">
+      <label>Title<input name="title" required maxlength="80" /></label>
+      <label>One-line summary<input name="summary" required maxlength="160" /></label>
+      <div class="row">
+        <label>Your name<input name="authorName" required /></label>
+        <label>Link (optional)<input name="authorUrl" type="url" placeholder="https://" /></label>
+      </div>
+      <div class="row">
+        <label>Context
+          <select name="context">
+            <option value="general">general</option>
+            <option value="veyra">veyra</option>
+            <option value="rewilding">rewilding</option>
+            <option value="other">other</option>
+          </select>
+        </label>
+        <label>Tags (comma-separated)<input name="tags" placeholder="quick, single-sensor" /></label>
+      </div>
+      <label>What is it for? (a short write-up)<textarea name="writeup" rows="4"></textarea></label>
+      <label>Ritual definition (paste the exported JSON)<textarea name="definitionText" rows="10" required placeholder="&#123; &quot;name&quot;: … &#125;"></textarea></label>
+      <input type="text" name="hp" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button class="button" type="submit">Submit for review</button>
+      <p id="ritual-form-status" class="form-status" role="status"></p>
+    </form>
+  </section>
+
+  <script>
+    const form = document.getElementById('ritual-form');
+    const status = document.getElementById('ritual-form-status');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Submitting…';
+      const data = Object.fromEntries(new FormData(form).entries());
+      try {
+        const res = await fetch('/.netlify/functions/submit-ritual', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const out = await res.json();
+        if (res.ok) {
+          status.textContent = 'Thank you — your ritual has been submitted for review.';
+          form.reset();
+        } else {
+          status.textContent = out.error || 'Something went wrong. Please check your entry.';
+        }
+      } catch {
+        status.textContent = 'Network error. Please try again.';
+      }
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .ritual-form { display: flex; flex-direction: column; gap: 1.1rem; max-width: var(--measure); margin-block: 2rem 4rem; }
+  .ritual-form label { display: flex; flex-direction: column; gap: .35rem; font-weight: 500; }
+  .ritual-form input, .ritual-form select, .ritual-form textarea {
+    font: inherit; padding: .6rem .7rem; border: 1px solid var(--line);
+    border-radius: 10px; background: var(--surface); color: var(--ink);
+  }
+  .ritual-form textarea { font-family: var(--font-mono, ui-monospace, monospace); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  @media (max-width: 40rem) { .row { grid-template-columns: 1fr; } }
+  .hp { position: absolute; left: -9999px; }
+  .form-status { min-height: 1.4em; color: var(--ink-soft); }
+</style>
