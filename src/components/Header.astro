@@ -1,0 +1,15 @@
+---
+const nav = [
+  { label: 'Ritual Library', href: '/rituals/' },
+  { label: 'Docs', href: '/docs/' },
+];
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="wordmark" href="/">HPCI Toolkit</a>
+    <nav class="site-nav">
+      {nav.map((n) => <a href={n.href}>{n.label}</a>)}
+      <a href="https://github.com/mor3s/hpci-toolkit">GitHub ↗</a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const rituals = (await getCollection('rituals')).sort(
+  (a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0)
+);
+---
+<BaseLayout title="Ritual Library — HPCI Toolkit" description="Rituals built with the toolkit, shared to read, adapt, and reuse.">
+  <section class="container">
+    <h1>Ritual Library</h1>
+    <p class="prose lead">
+      Rituals composed with the toolkit and shared here to be read and adapted. Each
+      entry shows its shape, the relationships it enacts, and the hardware it uses, and
+      offers its definition for download. A shared ritual is legible even where the
+      hardware differs — the idea travels even when the wiring does not.
+    </p>
+
+    <div class="card-grid">
+      {rituals.map((r) => (
+        <a class="card" href={`/rituals/${r.id}/`}>
+          <h3>{r.data.title}</h3>
+          <p>{r.data.summary}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

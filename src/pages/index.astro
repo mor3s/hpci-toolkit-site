@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import diagram from '../assets/three-agents-light.png';
+
+const cards = [
+  { title: 'Understand', href: '/docs/concepts/', body: 'Three agents on an equal footing, the six relationships between them, and what a ritual is.' },
+  { title: 'Tutorial', href: '/docs/tutorial/01-get-it-running/', body: 'Run it from a fresh clone, connect the electronics, and set everything up.' },
+  { title: 'Developers', href: '/docs/developers/01-overview/', body: 'Architecture, data model, the HTTP API, the ritual engine, and how to extend it.' },
+  { title: 'Ritual Library', href: '/rituals/', body: 'Rituals built with the toolkit, shared to read, adapt, and reuse.' },
+];
+---
+<BaseLayout title="HPCI Toolkit" description="Human–Plant–Computer Interaction — a small system for composing relationships among a person, a plant, and a machine.">
+  <section class="hero container">
+    <div class="hero__copy">
+      <h1>HPCI Toolkit</h1>
+      <p class="hero__tagline">Human–Plant–Computer Interaction — a small system for composing relationships among a person, a plant, and a machine.</p>
+      <div class="hero__actions">
+        <a class="button" href="/docs/concepts/">Understand the toolkit →</a>
+        <a class="button button--ghost" href="https://github.com/mor3s/hpci-toolkit">View on GitHub ↗</a>
+      </div>
+    </div>
+    <div class="hero__art">
+      <Image src={diagram} alt="Three agents — human, plant, and machine — each joined to the others by a pair of relationships." />
+    </div>
+  </section>
+
+  <section class="container">
+    <p class="prose lead">The toolkit fixes a small vocabulary — three agents, six relationships, and the rituals composed from them — and leaves open what any practice built on it is for. The paths below lead to the idea itself, to running it, to adapting it, and to what it has become in practice.</p>
+    <div class="card-grid">
+      {cards.map((c) => (
+        <a class="card" href={c.href}>
+          <h3>{c.title}</h3>
+          <p>{c.body}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

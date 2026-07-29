@@ -1,0 +1,99 @@
+:root {
+  /* palette */
+  --paper: #f6f4ec;
+  --surface: #fcfbf6;
+  --ink: #1e231e;
+  --ink-soft: #53605a;
+  --forest: #2e4a34;
+  --forest-strong: #223a29;
+  --sage: #8aa37e;
+  --line: rgba(30, 35, 30, 0.12);
+
+  /* type */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* scale */
+  --measure: 66ch;
+  --wide: 72rem;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; line-height: 1.15; }
+h1 { font-size: clamp(2.4rem, 1.5rem + 4vw, 4rem); letter-spacing: -0.01em; margin: 0; }
+h2 { font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.1rem); margin-top: 2.5em; }
+a { color: var(--forest); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.container { width: 100%; max-width: var(--wide); margin-inline: auto; padding-inline: clamp(1.2rem, 4vw, 2.5rem); }
+.prose { max-width: var(--measure); }
+
+.button {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--forest); color: var(--paper);
+  padding: .7rem 1.3rem; border-radius: 999px; font-weight: 500;
+  border: 1px solid var(--forest);
+}
+.button:hover { background: var(--forest-strong); text-decoration: none; }
+.button--ghost { background: transparent; color: var(--forest); }
+.button--ghost:hover { background: rgba(46, 74, 52, .08); }
+
+/* header */
+.site-header {
+  position: sticky; top: 0; z-index: 10;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 85%, transparent);
+  backdrop-filter: blur(8px);
+}
+.site-header__inner { display: flex; align-items: center; justify-content: space-between; padding-block: 1rem; }
+.wordmark { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; color: var(--ink); }
+.wordmark:hover { text-decoration: none; }
+.site-nav { display: flex; gap: 1.5rem; align-items: center; font-size: .97rem; }
+.site-nav a { color: var(--ink); }
+.site-nav a:hover { color: var(--forest); text-decoration: none; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; padding-block: clamp(3rem, 8vh, 6rem); }
+@media (min-width: 55rem) { .hero { grid-template-columns: 1.1fr .9fr; gap: 4rem; } }
+.hero__tagline { font-size: clamp(1.1rem, 1rem + .6vw, 1.4rem); color: var(--ink-soft); max-width: 42ch; }
+.hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+.hero__art img { width: 100%; height: auto; max-width: 460px; margin-inline: auto; display: block; }
+
+/* cards */
+.lead { font-size: 1.15rem; color: var(--ink-soft); margin-block: 2rem; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-block: 2rem 4rem; }
+.card { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; color: var(--ink); transition: border-color .15s, transform .15s; }
+.card:hover { border-color: var(--sage); text-decoration: none; transform: translateY(-2px); }
+.card h3 { font-family: var(--font-display); margin: 0 0 .4rem; color: var(--forest); }
+.card p { margin: 0; color: var(--ink-soft); font-size: .97rem; }
+
+/* footer */
+.site-footer { border-top: 1px solid var(--line); margin-top: 4rem; padding-block: 2.5rem; color: var(--ink-soft); font-size: .9rem; }
+
+/* ritual entry */
+.ritual { max-width: var(--measure); }
+.ritual__back { font-size: .95rem; margin-top: 1.5rem; }
+.ritual__meta { color: var(--ink-soft); font-size: .95rem; }
+.ritual__download { margin-block: 2rem 4rem; }
+
+.ritual-steps { display: flex; flex-direction: column; gap: .85rem; margin-block: 1rem 2rem; }
+.ritual-step { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.15rem; }
+.ritual-step__head { display: flex; align-items: center; justify-content: space-between; gap: .75rem; flex-wrap: wrap; }
+.ritual-step__title { font-size: 1.05rem; }
+.pole-chain { display: inline-flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+.pole { display: inline-flex; align-items: center; gap: .3rem; background: color-mix(in srgb, var(--sage) 22%, var(--paper)); border-radius: 999px; padding: .15rem .6rem; font-size: .85rem; }
+.pole-arrow { color: var(--ink-soft); }
+.ritual-step__content { margin: .6rem 0 0; }
+.ritual-step__glyph { margin-right: .35rem; }
+.ritual-step__answers { margin: .35rem 0 0; color: var(--ink-soft); font-size: .85rem; }
+.mermaid { background: transparent; margin-block: 1rem 2rem; }

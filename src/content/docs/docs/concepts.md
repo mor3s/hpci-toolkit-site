@@ -11,7 +11,7 @@ This even-handedness is the toolkit's organising commitment. Most sensing system
 
 Every situation the toolkit builds is described in terms of three agents: the human, the plant, and the machine. The human is the person present to the plant and party to the ritual. The plant is the living thing the situation is organised around, whose states are treated as its own rather than as mere data about it. The machine is what senses and responds — a small sensing device, or the interface through which a person perceives and acts. Naming all three as agents is a deliberate choice: it establishes that each has a part to play and that the relationships between them run in both directions, rather than casting two of them as the equipment through which a third pursues its ends.
 
-![Three agents — human, plant, and machine — each joined to the others by a pair of relationships: say and ask, sense and act, tend and attend.](../../assets/three_agents_six_relationships.svg)
+![Three agents — human, plant, and machine — each joined to the others by a pair of relationships: say and ask, sense and act, tend and attend.](../../../assets/three_agents_six_relationships.svg)
 
 ## Six relationships
 
@@ -25,7 +25,7 @@ The sequences composed from these relationships are called rituals, and the choi
 
 ## How it is arranged
 
-The system is deliberately modest in construction. It comprises three parts that do not address one another directly: the devices attached to plants, a single small server, and the interface a person uses. Each communicates only through a shared record held by the server, which serves as the one source of truth about what exists and what has occurred. A device does not command the interface, nor the interface a device; each reads from and writes to the common record, and the server reconciles them. This indirection is what keeps the parts independent and the whole robust, and it has a consequence for the person taking part: they never encounter the machinery as such, only the plant, the ritual, and their own role within it. A fuller technical account is given in the [developer documentation](/developers/01-overview/).
+The system is deliberately modest in construction. It comprises three parts that do not address one another directly: the devices attached to plants, a single small server, and the interface a person uses. Each communicates only through a shared record held by the server, which serves as the one source of truth about what exists and what has occurred. A device does not command the interface, nor the interface a device; each reads from and writes to the common record, and the server reconciles them. This indirection is what keeps the parts independent and the whole robust, and it has a consequence for the person taking part: they never encounter the machinery as such, only the plant, the ritual, and their own role within it. A fuller technical account is given in the [developer documentation](/docs/developers/01-overview/).
 
 ## One backbone, many practices
 

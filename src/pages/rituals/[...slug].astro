@@ -1,0 +1,67 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { deriveSteps, deriveHardware, toMermaid } from '../../lib/ritual.js';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('rituals');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const def = entry.data.definition;
+const steps = deriveSteps(def);
+const hardware = deriveHardware(def);
+const mermaid = toMermaid(def);
+const { Content } = await render(entry);
+const json = JSON.stringify(def, null, 2);
+const href = 'data:application/json;charset=utf-8,' + encodeURIComponent(json);
+---
+<BaseLayout title={`${entry.data.title} — Ritual Library`} description={entry.data.summary}>
+  <article class="container ritual">
+    <p class="ritual__back"><a href="/rituals/">← Ritual Library</a></p>
+    <h1>{entry.data.title}</h1>
+    <p class="prose lead"><em>{entry.data.summary}</em></p>
+    <p class="ritual__meta">By {entry.data.author.name} · context: {entry.data.context}</p>
+
+    <div class="prose"><Content /></div>
+
+    <h2>You'll need</h2>
+    {hardware.sensors.length > 0 && <p><strong>Sensors:</strong> {hardware.sensors.join(', ')}</p>}
+    {hardware.outputs.length > 0 && <p><strong>Outputs:</strong> {hardware.outputs.join(', ')}</p>}
+    {hardware.sensors.length === 0 && hardware.outputs.length === 0 && (
+      <p>No sensors or outputs — this ritual runs entirely through the interface.</p>
+    )}
+
+    <h2>Step by step</h2>
+    <div class="ritual-steps">
+      {steps.map((s) => (
+        <article class="ritual-step">
+          <header class="ritual-step__head">
+            <span class="ritual-step__title">{s.n} · <strong>{s.type}</strong></span>
+            <span class="pole-chain">
+              {s.chain.map((p, i) => (
+                <Fragment>
+                  {i > 0 && <span class="pole-arrow">→</span>}
+                  <span class="pole"><span class="pole-glyph">{p.g}</span> {p.label}</span>
+                </Fragment>
+              ))}
+            </span>
+          </header>
+          <p class="ritual-step__content"><span class="ritual-step__glyph">{s.glyph}</span> {s.content}</p>
+          {s.answers && <p class="ritual-step__answers">answers: {s.answers.join(', ')}</p>}
+        </article>
+      ))}
+    </div>
+
+    <h2>Shape</h2>
+    <pre class="mermaid">{mermaid}</pre>
+
+    <p class="ritual__download"><a class="button button--ghost" href={href} download={`${entry.id}.json`}>Download ritual JSON</a></p>
+  </article>
+
+  <script>
+    import mermaid from 'mermaid';
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+  </script>
+</BaseLayout>
