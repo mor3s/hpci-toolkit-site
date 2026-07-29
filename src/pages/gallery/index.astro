@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const items = (await getCollection('gallery')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Gallery — HPCI Toolkit" description="Applications built on the toolkit, each adapting its vocabulary to a different purpose.">
+  <section class="container">
+    <h1>Gallery</h1>
+    <p class="prose lead">
+      Applications built on the toolkit. The toolkit fixes only a small vocabulary — three
+      agents, six relationships, and rituals composed from them — and leaves open what any
+      practice built on it is for. These are demonstrations of how far the same model can be
+      adapted while remaining recognisably itself.
+    </p>
+
+    <div class="card-grid">
+      {items.map((it) => (
+        <a class="card gallery-card" href={`/gallery/${it.id}/`}>
+          {it.data.cover && <img class="gallery-card__cover" src={it.data.cover} alt={it.data.coverAlt ?? ''} />}
+          <h3>{it.data.title}</h3>
+          <p>{it.data.tagline}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

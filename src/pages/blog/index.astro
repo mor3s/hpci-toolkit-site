@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => import.meta.env.DEV || !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d) => d.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title="Blog — HPCI Toolkit" description="Notes on building with the toolkit — rituals, adaptations, and reflections.">
+  <section class="container">
+    <h1>Blog</h1>
+    <p class="prose lead">
+      Notes on building with the toolkit — rituals worth trying, adaptations to new
+      contexts, and reflections on attention, plants, and machines.
+    </p>
+    <p><a class="button" href="/blog/submit/">Write for the blog →</a></p>
+    <ul class="post-list">
+      {posts.map((p) => (
+        <li class="post-list__item">
+          <a href={`/blog/${p.id}/`}>
+            <h3>{p.data.title}{p.data.draft && <span class="draft-tag"> · draft</span>}</h3>
+            <p class="post-list__meta">{fmt(p.data.date)} · {p.data.author}</p>
+            <p class="post-list__desc">{p.data.description}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

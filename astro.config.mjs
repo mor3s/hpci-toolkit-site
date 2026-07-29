@@ -14,15 +14,6 @@ export default defineConfig({
 				{ label: 'Understand', items: ['docs/concepts'] },
 				{ label: 'Tutorial', items: [{ autogenerate: { directory: 'docs/tutorial' } }] },
 				{ label: 'Developers', items: [{ autogenerate: { directory: 'docs/developers' } }] },
-				{
-					label: 'Showcase',
-					items: [
-						{ label: 'Overview', slug: 'docs/showcase' },
-						{ label: 'Veyra', slug: 'docs/showcase/veyra' },
-						{ label: 'Ritual Grove', slug: 'docs/showcase/ritual-grove' },
-					],
-				},
-				{ label: 'Ritual Library', link: '/rituals/' },
 			],
 		}),
 	],

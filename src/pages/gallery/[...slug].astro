@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('gallery');
+  return items.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BaseLayout title={`${entry.data.title} — Gallery`} description={entry.data.tagline}>
+  <article class="container prose">
+    <p class="ritual__back"><a href="/gallery/">← Gallery</a></p>
+    <h1>{entry.data.title}</h1>
+    <p class="lead"><em>{entry.data.tagline}</em></p>
+    {entry.data.cover && <img class="gallery-hero" src={entry.data.cover} alt={entry.data.coverAlt ?? ''} />}
+    <Content />
+  </article>
+</BaseLayout>

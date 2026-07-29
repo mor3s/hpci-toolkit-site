@@ -1,9 +1,9 @@
 ---
 title: Ritual Grove
-description: A wearable field system built on the toolkit for participatory woodland regeneration, following a tree from seed to forest across seasons of volunteer fieldwork.
+tagline: A wearable field system for participatory woodland regeneration, following a tree from seed to forest across seasons of volunteer fieldwork.
+context: rewilding
+order: 2
 ---
-
-*The Ritual Grove is a wearable field system built on the toolkit for participatory woodland regeneration, following a tree from seed to forest across seasons of volunteer fieldwork.*
 
 The Ritual Grove adapts the toolkit toward sustained ecological practice, and it names the ritual model explicitly as its foundation: a ritual here is not ornament added to scientific work but a repeatable, adaptable protocol coordinating human attention, machine sensing, ecological knowledge, and acts of care. The three agents are all present but scaled outward. The human is the volunteer or fieldworker, and the system assumes several at once, of varied experience. The machine is a wearable assembly — a forearm-mounted Field Bracer carrying an ESP32 sensor layer, a Raspberry Pi in a backpack running the ritual engine and an offline map, and a phone as the task-specific interface and camera. The plant is the agent most transformed: no longer a single organism on a table but a tree followed across its entire biography, from seed lot through nursery batch to planted sapling and monitored tree, and beyond any one tree, a whole regeneration site.
 

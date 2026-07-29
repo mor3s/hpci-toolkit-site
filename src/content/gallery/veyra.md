@@ -1,9 +1,9 @@
 ---
 title: Veyra
-description: A tabletop role-playing game built on the toolkit, in which a real living plant sits at the table and the toolkit's grammar is played rather than operated.
+tagline: A tabletop role-playing game in which a real living plant sits at the table and the toolkit's grammar is played rather than operated.
+context: game
+order: 1
 ---
-
-*Veyra is a tabletop role-playing game built on the toolkit, in which a real living plant sits at the table and the toolkit's grammar is played rather than operated.*
 
 Veyra adapts the toolkit into fiction without discarding any of its structure. The three agents are all present, renamed but not altered: the plant is the *Witness*, a living plant physically at the table throughout a session; the machine is the *Loom*, a cluster of sensing filaments and light-bearing nodes grafted onto the Witness, joined for larger workings by the *Lens*, an immersive interface; and the humans are the players, whose characters carry these instruments through a failing world. What the toolkit calls a ritual, Veyra calls a *Rite*, and defines in almost the same terms the toolkit uses — not a spell and not a conversation, but a repeated, deliberate pattern of attention and response performed the same way each time because, over generations, it became the only reliable exchange anyone managed with these plants.
 

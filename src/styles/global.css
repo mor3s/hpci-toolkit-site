@@ -97,3 +97,30 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .ritual-step__glyph { margin-right: .35rem; }
 .ritual-step__answers { margin: .35rem 0 0; color: var(--ink-soft); font-size: .85rem; }
 .mermaid { background: transparent; margin-block: 1rem 2rem; }
+
+.gallery-card__cover { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-bottom: .9rem; }
+.gallery-hero { width: 100%; height: auto; border-radius: var(--radius); margin-block: 1.5rem; }
+
+.post-list { list-style: none; padding: 0; margin-block: 2rem 4rem; display: flex; flex-direction: column; gap: .5rem; }
+.post-list__item a { display: block; padding: 1.25rem 1.4rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--ink); transition: border-color .15s, transform .15s; }
+.post-list__item a:hover { border-color: var(--sage); text-decoration: none; transform: translateY(-2px); }
+.post-list__item h3 { font-family: var(--font-display); color: var(--forest); margin: 0 0 .3rem; }
+.post-list__meta { margin: 0 0 .5rem; color: var(--ink-soft); font-size: .9rem; }
+.post-list__desc { margin: 0; color: var(--ink-soft); }
+.draft-tag { color: var(--sage); font-family: var(--font-body); font-size: .8rem; font-weight: 400; }
+.post-meta { color: var(--ink-soft); font-size: .95rem; margin-top: 0; }
+
+/* submission forms (ritual + blog) */
+.ritual-form { display: flex; flex-direction: column; gap: 1.1rem; max-width: var(--measure); margin-block: 2rem 4rem; }
+.ritual-form label { display: flex; flex-direction: column; gap: .35rem; font-weight: 500; }
+.ritual-form input, .ritual-form select, .ritual-form textarea {
+  font: inherit; padding: .6rem .7rem; border: 1px solid var(--line);
+  border-radius: 10px; background: var(--surface); color: var(--ink); width: 100%;
+}
+.ritual-form textarea { font-family: var(--font-mono, ui-monospace, monospace); resize: vertical; }
+.ritual-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+@media (max-width: 40rem) { .ritual-form .row { grid-template-columns: 1fr; } }
+.ritual-form .hp { position: absolute; left: -9999px; }
+.form-status { min-height: 1.4em; color: var(--ink-soft); }
+
+.prose img { max-width: 100%; height: auto; border-radius: 10px; margin-block: 1.5rem; display: block; }

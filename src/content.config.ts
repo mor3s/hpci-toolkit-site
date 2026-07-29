@@ -25,7 +25,33 @@ const rituals = defineCollection({
   }),
 });
 
+const gallery = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/gallery' }),
+  schema: z.object({
+    title: z.string(),
+    tagline: z.string(),
+    context: z.enum(['game', 'rewilding', 'other']),
+    order: z.number().default(0),
+    cover: z.string().optional(),      // reserved for an image later
+    coverAlt: z.string().optional(),
+  }),
+});
+
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    author: z.string(),
+    date: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   docs: defineCollection({ loader: docsLoader(), schema: docsSchema() }),
   rituals,
+  gallery,
+  blog,
 };

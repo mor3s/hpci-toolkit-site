@@ -14,7 +14,7 @@ const rituals = (await getCollection('rituals')).sort(
       offers its definition for download. A shared ritual is legible even where the
       hardware differs — the idea travels even when the wiring does not.
     </p>
-
+    <p><a class="button" href="/rituals/submit/">Share a ritual →</a></p>
     <div class="card-grid">
       {rituals.map((r) => (
         <a class="card" href={`/rituals/${r.id}/`}>
