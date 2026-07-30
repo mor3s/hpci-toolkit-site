@@ -100,6 +100,28 @@ else if (source == "bh1750") {
 
 Include the library and initialise it in `setup()`, mirroring how the BME680 is set up. The rule: the catalog entry and the firmware `source` handler are two halves of one addition. Match the `source` string in both and they connect.
 
-## Add an output
+## Add a digital (on/off) input
 
-Outputs live in `OUTPUT_CATALOG`. The RGB LED is `type: "rgb"`, `pin_kind: "rgb"`, on three PWM pins. A new *kind* of output — a relay, say — needs a new `type` plus a firmware branch that drives it, following the same two-halves rule. Output pins come from the pool 25, 26, 27, 16, 17, 18, 19, 23, which are PWM-capable and clear of the I2C pins.
+A button, PIR, reed switch, or touch pad is an on/off *event*, not a level, so it uses `source: "digital"` — and because the firmware already has one `digital` branch, adding any such input is catalog-only:
+
+```js
+{
+  id: "pir_motion",
+  label: "Motion (PIR)",
+  source: "digital",
+  pin_kind: "adc",              // digital inputs draw from the same pin pool
+  default_name: "motion",
+  interval_ms: 2000,            // the heartbeat; edges post immediately regardless
+  instructions: "Signal to GPIO {pin}, plus 3V3 and GND."
+}
+```
+
+It posts the instant the pin changes, with `interval_ms` acting only as a self-correcting heartbeat. No firmware change is needed — the one digital branch handles it.
+
+## Add an output (actuator)
+
+Outputs live in `OUTPUT_CATALOG`, and there are two pin shapes: `pin_kind: "rgb"` (three PWM pins, as the RGB LED uses) and `pin_kind: "single_out"` (one pin, as the LED, buzzer, servo, and speaker use). A new *kind* of output needs a `type`, a `pin_kind`, and a firmware branch that drives it — the same two-halves rule as sensors, matched by the `type` string. Output pins come from the pool 25, 26, 27, 16, 17, 18, 19, 23 (PWM-capable, clear of the I2C pins).
+
+The value an output carries is arbitrary JSON, so each type carries what it needs: RGB `{r,g,b}`, a servo `{angle}`, a speaker `{freq}`, on/off outputs white or black. When the value isn't a colour, three places learn its shape — the firmware branch that drives the pin, the device-page control in `device.js` (`outputControlFor`), and the ritual builder's `act` block in `builder.js`. Each is a small branch; template off the servo or speaker.
+
+A note on the speaker: the ESP32 can't set a plain speaker's volume in software — a digital pin is on or off — so the toolkit controls *pitch* via `tone()`, and *volume* is a hardware matter: a series resistor for a fixed lower volume, or a series potentiometer for an adjustable knob. No code, just wiring.

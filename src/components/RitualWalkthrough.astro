@@ -1,0 +1,160 @@
+---
+const STEPS = [
+  { rel: 'say',    from: 'machine', to: 'human',   glyph: '💬', caption: 'The machine opens the ritual — “Good morning; time to check on the basil.”' },
+  { rel: 'ask',    from: 'human',   to: 'machine', glyph: '❓', caption: 'Before anything is measured, it asks the person first: does the plant look thirsty? A human judgement is recorded before the sensor speaks.' },
+  { rel: 'sense',  from: 'plant',   to: 'machine', glyph: '🔍', caption: 'A soil sensor reads how dry the soil is — the plant informing the machine.' },
+  { rel: 'act',    from: 'machine', to: 'plant',   glyph: '💡', caption: 'The machine answers on the plant itself: an RGB light glows amber to show the reading.' },
+  { rel: 'act',    from: 'machine', to: 'human',   glyph: '🔔', caption: 'It also turns toward the person — a soft tone from the speaker draws their attention to the plant.' },
+  { rel: 'tend',   from: 'human',   to: 'plant',   glyph: '🌿', caption: 'The soil is dry, so the person is asked to tend it — give it a little water, and confirm it was done.' },
+  { rel: 'attend', from: 'plant',   to: 'human',   glyph: '👁️', caption: 'To close, the person is asked to attend — to look at the plant for a moment and note one thing they notice.' },
+];
+---
+
+<figure class="wt" tabindex="0" aria-label="Interactive walkthrough of a morning check-in ritual">
+  <svg viewBox="0 0 520 380" class="wt-svg" role="img" aria-hidden="true">
+    <defs>
+      <marker id="wt-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M1 1 L9 5 L1 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+      </marker>
+    </defs>
+
+    <path id="wt-arc" class="wt-arc" d="" fill="none" marker-end="url(#wt-arrow)" />
+
+    <g class="wt-pole" data-pole="human">
+      <circle cx="260" cy="70" r="36" />
+      <text class="wt-glyph" x="260" y="70">🧑</text>
+      <text class="wt-label" x="260" y="20">Human</text>
+    </g>
+    <g class="wt-pole" data-pole="plant">
+      <circle cx="90" cy="300" r="36" />
+      <text class="wt-glyph" x="90" y="300">🌱</text>
+      <text class="wt-label" x="90" y="360">Plant</text>
+    </g>
+    <g class="wt-pole" data-pole="machine">
+      <circle cx="430" cy="300" r="36" />
+      <text class="wt-glyph" x="430" y="300">🖥️</text>
+      <text class="wt-label" x="430" y="360">Machine</text>
+    </g>
+
+    <g id="wt-badge" transform="translate(260 185)">
+      <circle id="wt-badge-circle" r="16" />
+      <text id="wt-badge-glyph" x="0" y="0"></text>
+    </g>
+  </svg>
+
+  <figcaption class="wt-info" aria-live="polite">
+    <p class="wt-counter"><span id="wt-counter"></span> · <span id="wt-rel" class="wt-rel"></span></p>
+    <p id="wt-caption" class="wt-caption"></p>
+  </figcaption>
+
+  <div class="wt-controls">
+    <button id="wt-prev" class="wt-btn" type="button">← Previous</button>
+    <div class="wt-dots">
+      {STEPS.map((_, j) => <button class="wt-dot" type="button" data-i={j} aria-label={`Step ${j + 1}`}></button>)}
+    </div>
+    <button id="wt-next" class="wt-btn" type="button">Next →</button>
+  </div>
+</figure>
+
+<script define:vars={{ STEPS }}>
+  const POLES = { human: { x: 260, y: 70 }, plant: { x: 90, y: 300 }, machine: { x: 430, y: 300 } };
+  const COLORS = { say: '#2e4a34', ask: '#5b7f52', sense: '#35708a', act: '#b9822b', tend: '#4f8a57', attend: '#8a6fae' };
+  const cap = (s) => s[0].toUpperCase() + s.slice(1);
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const arc = document.getElementById('wt-arc');
+  const badge = document.getElementById('wt-badge');
+  const badgeCircle = document.getElementById('wt-badge-circle');
+  const badgeGlyph = document.getElementById('wt-badge-glyph');
+  const counter = document.getElementById('wt-counter');
+  const relLabel = document.getElementById('wt-rel');
+  const caption = document.getElementById('wt-caption');
+  const prevBtn = document.getElementById('wt-prev');
+  const nextBtn = document.getElementById('wt-next');
+  const dots = [...document.querySelectorAll('.wt-dot')];
+  const poleEls = {};
+  document.querySelectorAll('.wt-pole').forEach((el) => (poleEls[el.dataset.pole] = el));
+
+  let i = 0;
+
+  function render() {
+    const s = STEPS[i], color = COLORS[s.rel];
+    const A = POLES[s.from], B = POLES[s.to];
+    const dx = B.x - A.x, dy = B.y - A.y, len = Math.hypot(dx, dy);
+    const ux = dx / len, uy = dy / len, off = 44;
+    const ax = A.x + ux * off, ay = A.y + uy * off, bx = B.x - ux * off, by = B.y - uy * off;
+    const mx = (ax + bx) / 2, my = (ay + by) / 2, cx = mx - uy * 46, cy = my + ux * 46;
+
+    arc.setAttribute('d', `M ${ax} ${ay} Q ${cx} ${cy} ${bx} ${by}`);
+    arc.style.stroke = color;
+
+    badge.setAttribute('transform', `translate(${cx} ${cy})`);
+    badgeCircle.style.stroke = color;
+    badgeGlyph.textContent = s.glyph;
+
+    if (reduce) {
+      arc.style.strokeDasharray = 'none';
+      arc.style.strokeDashoffset = '0';
+    } else {
+      const L = arc.getTotalLength();
+      arc.style.transition = 'none';
+      arc.style.strokeDasharray = L;
+      arc.style.strokeDashoffset = L;
+      requestAnimationFrame(() => {
+        arc.style.transition = 'stroke-dashoffset .5s ease';
+        arc.style.strokeDashoffset = '0';
+      });
+    }
+
+    for (const p of ['human', 'plant', 'machine']) {
+      const active = p === s.from || p === s.to;
+      poleEls[p].classList.toggle('is-active', active);
+      poleEls[p].classList.toggle('is-dim', !active);
+    }
+
+    counter.textContent = `Step ${i + 1} of ${STEPS.length}`;
+    relLabel.textContent = `${s.rel} · ${cap(s.from)} → ${cap(s.to)}`;
+    relLabel.style.color = color;
+    caption.textContent = s.caption;
+    prevBtn.disabled = i === 0;
+    nextBtn.disabled = i === STEPS.length - 1;
+    dots.forEach((d, j) => d.classList.toggle('is-on', j === i));
+  }
+
+  const go = (n) => { i = Math.max(0, Math.min(STEPS.length - 1, n)); render(); };
+  prevBtn.addEventListener('click', () => go(i - 1));
+  nextBtn.addEventListener('click', () => go(i + 1));
+  dots.forEach((d) => d.addEventListener('click', () => go(+d.dataset.i)));
+  document.querySelector('.wt').addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') go(i - 1);
+    if (e.key === 'ArrowRight') go(i + 1);
+  });
+
+  render();
+</script>
+
+<style>
+  .wt { margin-block: 1.5rem 2.5rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .wt:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+  .wt-svg { width: 100%; max-width: 520px; height: auto; display: block; margin-inline: auto; }
+  .wt-pole circle { fill: var(--paper); stroke: var(--line); stroke-width: 1.5; transition: stroke .2s, opacity .2s; }
+  .wt-pole.is-active circle { stroke: var(--forest); stroke-width: 2.5; }
+  .wt-pole.is-dim { opacity: .38; }
+  .wt-glyph { font-size: 30px; text-anchor: middle; dominant-baseline: central; }
+  .wt-label { font-family: var(--font-body); font-size: 15px; font-weight: 600; fill: var(--ink); text-anchor: middle; }
+  .wt-arc { stroke-width: 3.5; stroke-linecap: round; }
+  #wt-badge-circle { fill: var(--surface); stroke-width: 2; }
+  #wt-badge-glyph { font-size: 15px; text-anchor: middle; dominant-baseline: central; }
+  .wt-info { margin-top: 1rem; min-height: 5.5rem; }
+  .wt-counter { margin: 0 0 .25rem; font-size: .85rem; color: var(--ink-soft); }
+  .wt-rel { font-weight: 600; }
+  .wt-caption { margin: 0; }
+  .wt-controls { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; }
+  .wt-btn { font: inherit; font-size: .9rem; padding: .45rem .9rem; border: 1px solid var(--forest); border-radius: 999px; background: transparent; color: var(--forest); cursor: pointer; }
+  .wt-btn:hover:not(:disabled) { background: rgba(46, 74, 52, .08); }
+  .wt-btn:disabled { opacity: .35; cursor: default; }
+  .wt-dots { display: flex; gap: .5rem; }
+  .wt-dot { width: 10px; height: 10px; padding: 0; border-radius: 999px; border: 1px solid var(--sage); background: transparent; cursor: pointer; }
+  .wt-dot.is-on { background: var(--forest); border-color: var(--forest); }
+  @media (max-width: 34rem) { .wt-controls { flex-wrap: wrap; justify-content: center; } }
+</style>
